@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Pinterest</title>
+    <link rel="stylesheet" type="text/css" href="/public/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" />
+    <script src="/public/jquery-3.1.1.min.js"></script>
+    <script src="/public/bootstrap.min.js"></script>
+    <script src="/public/masonry.pkgd.min.js"></script>
+    {{ block "extra-head" . }}{{ end }}
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Home</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            {{ if .user.NickName }}
+              <li><a href="/my-images">My Images</a></li>
+              <li><a href="/add-image">Add Image</a></li>
+            {{ end }}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {{ if .user.NickName }}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ .user.NickName }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            {{ else }}
+              <li><a href="/auth/twitter">Log in with Twitter</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {{ block "content" . }}{{ end }}
+    </div>
+  </body>
+</html>

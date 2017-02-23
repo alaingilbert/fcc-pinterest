@@ -1,0 +1,29 @@
+{{ define "extra-head" }}
+<style>
+</style>
+{{ end }}
+
+
+{{ define "content" }}
+
+{{ if .error }}
+<div class="alert alert-danger">
+    <strong>Error:</strong> {{ .error }}
+</div>
+{{ end }}
+
+<form action="/images/new" method="POST">
+    <div class="form-group">
+        <label>Url:</label>
+        <input type="url" name="url" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description:</label>
+        <input type="text" name="description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add image</button>
+    </div>
+</form>
+
+{{ end }}

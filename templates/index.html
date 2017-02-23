@@ -1,0 +1,52 @@
+{{ define "extra-head" }}
+<style>
+.grid {
+    visibility: hidden;
+}
+.grid-item {
+    width: 200px;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+.grid-item .image {
+    width: 190px;
+    margin-bottom: 10px;
+}
+.grid-item .avatar {
+    width: 30px;
+}
+</style>
+{{ end }}
+
+
+{{ define "content" }}
+
+<div class="grid">
+{{ range .images }}
+    <div class="grid-item">
+        <img src="{{ .URL }}" alt="" class="image" onError="this.onerror=null;this.src='/public/noimage.png';" />
+        <div>
+            <a href="/users/{{ .Owner }}"><img src="{{ .OwnerAvatar }}" alt="" class="avatar" /></a>
+            {{ if eq .Owner $.user.TwitterID }}
+                <a href="/images/delete/{{ .ID.Hex }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: 205,
+    });
+    $('.grid').css('visibility','visible').hide().fadeIn("slow");
+});
+</script>
+{{ end }}
